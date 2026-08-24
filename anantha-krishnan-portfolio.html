@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Anantha Krishnan · Full Stack Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<style>
+  :root{
+    --bg:#0a1628;
+    --bg-panel:#0d1d38;
+    --grid:rgba(125,175,235,0.07);
+    --grid-major:rgba(125,175,235,0.14);
+    --line:rgba(125,175,235,0.22);
+    --ink:#dfe9f6;
+    --ink-dim:#7f9bc2;
+    --blue:#5fb4f5;
+    --amber:#f2a93c;
+    --amber-soft:rgba(242,169,60,0.12);
+    --display:'Space Grotesk',sans-serif;
+    --body:'IBM Plex Sans',sans-serif;
+    --mono:'IBM Plex Mono',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;}*{animation:none !important;transition:none !important;}}
+
+  body{
+    font-family:var(--body);
+    background:
+      linear-gradient(var(--grid) 1px, transparent 1px) 0 0/40px 40px,
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0/40px 40px,
+      linear-gradient(var(--grid-major) 1px, transparent 1px) 0 0/160px 160px,
+      linear-gradient(90deg, var(--grid-major) 1px, transparent 1px) 0 0/160px 160px,
+      var(--bg);
+    color:var(--ink);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  ::selection{background:var(--amber);color:#0a1628;}
+
+  .container{max-width:1080px;margin:0 auto;padding:0 1.6rem;}
+
+  /* NAV */
+  .nav{position:sticky;top:0;z-index:50;background:rgba(10,22,40,0.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  .nav-inner{max-width:1080px;margin:0 auto;padding:0 1.6rem;height:58px;display:flex;align-items:center;justify-content:space-between;}
+  .nav-logo{display:flex;align-items:center;gap:0.55rem;font-family:var(--mono);font-size:0.85rem;letter-spacing:0.04em;color:var(--ink);}
+  .nav-logo .mark{width:22px;height:22px;border:1.5px solid var(--amber);border-radius:50%;position:relative;flex-shrink:0;}
+  .nav-logo .mark::before,.nav-logo .mark::after{content:"";position:absolute;background:var(--amber);}
+  .nav-logo .mark::before{left:50%;top:2px;bottom:2px;width:1px;transform:translateX(-50%);}
+  .nav-logo .mark::after{top:50%;left:2px;right:2px;height:1px;transform:translateY(-50%);}
+  .nav-links{display:flex;gap:1.7rem;font-family:var(--mono);font-size:0.78rem;letter-spacing:0.03em;color:var(--ink-dim);}
+  .nav-links a{position:relative;padding-bottom:3px;}
+  .nav-links a:hover{color:var(--ink);}
+  .nav-links a.active{color:var(--amber);}
+  .nav-links a.active::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--amber);}
+
+  section{padding:5.5rem 0;border-bottom:1px solid var(--line);position:relative;}
+  section:last-of-type{border-bottom:none;}
+
+  .sheet-label{
+    display:inline-flex;align-items:center;gap:0.6rem;
+    font-family:var(--mono);font-size:0.78rem;color:var(--amber);
+    letter-spacing:0.08em;margin-bottom:1rem;
+  }
+  .sheet-label::before{content:"";width:22px;height:1px;background:var(--amber);}
+  .section-title{font-family:var(--display);font-size:2rem;font-weight:600;letter-spacing:-0.01em;margin-bottom:1.75rem;}
+
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity 0.6s ease,transform 0.6s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* HERO */
+  .hero{padding:5.5rem 0 4.5rem;min-height:88vh;display:flex;flex-direction:column;justify-content:center;}
+  .hero-eyebrow{font-family:var(--mono);font-size:0.82rem;color:var(--blue);letter-spacing:0.1em;margin-bottom:1.4rem;display:flex;align-items:center;gap:0.7rem;}
+  .hero-eyebrow .compass{width:16px;height:16px;border:1.4px solid var(--blue);border-radius:50%;position:relative;animation:spin 14s linear infinite;}
+  .hero-eyebrow .compass::before{content:"";position:absolute;top:-3px;left:50%;width:1px;height:5px;background:var(--blue);transform:translateX(-50%);}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .hero h1{font-family:var(--display);font-size:clamp(2.4rem,5.4vw,3.6rem);font-weight:700;letter-spacing:-0.02em;line-height:1.12;margin-bottom:1.3rem;}
+  .hero h1 span{color:var(--amber);}
+  .hero-desc{max-width:560px;font-size:1.08rem;color:var(--ink-dim);margin-bottom:2.2rem;}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:0.9rem;margin-bottom:3rem;}
+  .btn{display:inline-flex;align-items:center;gap:0.55rem;padding:0.75rem 1.5rem;font-family:var(--mono);font-size:0.85rem;letter-spacing:0.03em;border:1px solid transparent;transition:0.2s;cursor:pointer;}
+  .btn-primary{background:var(--amber);color:#1a1206;font-weight:600;}
+  .btn-primary:hover{background:#ffb84d;transform:translateY(-1px);}
+  .btn-ghost{background:transparent;color:var(--ink);border-color:var(--line);}
+  .btn-ghost:hover{border-color:var(--blue);color:var(--blue);}
+
+  /* TITLE BLOCK */
+  .title-block{border:1px solid var(--line);max-width:560px;font-family:var(--mono);font-size:0.78rem;background:rgba(13,29,56,0.6);}
+  .tb-row{display:grid;grid-template-columns:1fr 1fr;}
+  .tb-cell{border-top:1px solid var(--line);border-right:1px solid var(--line);padding:0.6rem 0.9rem;}
+  .tb-cell:last-child{border-right:none;}
+  .tb-row:first-child .tb-cell{border-top:none;}
+  .tb-cell .k{color:var(--ink-dim);display:block;font-size:0.68rem;letter-spacing:0.08em;margin-bottom:0.25rem;}
+  .tb-cell .v{color:var(--ink);}
+  .tb-cell .v.amber{color:var(--amber);}
+
+  /* PROFILE */
+  .profile-grid{display:grid;grid-template-columns:1.55fr 1fr;gap:2.6rem;align-items:start;}
+  .profile-text p{color:var(--ink-dim);margin-bottom:1.1rem;font-size:1.01rem;}
+  .meta-list{display:flex;flex-direction:column;gap:0.7rem;margin-top:1.4rem;}
+  .meta-item{display:flex;align-items:center;gap:0.7rem;font-size:0.9rem;color:var(--ink-dim);}
+  .meta-item i{color:var(--amber);width:16px;font-size:0.85rem;}
+
+  .skill-cloud{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem;}
+  .skill{font-family:var(--mono);font-size:0.75rem;padding:0.4rem 0.75rem;border:1px solid var(--line);color:var(--ink-dim);}
+  .skill.hot{border-color:rgba(242,169,60,0.45);color:var(--amber);background:var(--amber-soft);}
+
+  /* ACHIEVEMENTS - dimension callouts */
+  .achv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .achv-card{background:var(--bg);padding:1.7rem 1.5rem;}
+  .achv-num{font-family:var(--display);font-size:2.2rem;font-weight:700;color:var(--amber);line-height:1;margin-bottom:0.7rem;position:relative;}
+  .achv-num::after{content:"";display:block;width:28px;height:1px;background:var(--blue);margin-top:0.8rem;}
+  .achv-card p{color:var(--ink-dim);font-size:0.86rem;}
+
+  /* EXPERIENCE */
+  .role-header{margin-bottom:2.2rem;}
+  .role-title{font-family:var(--display);font-size:1.3rem;font-weight:600;margin-bottom:0.3rem;}
+  .role-meta{font-family:var(--mono);font-size:0.82rem;color:var(--ink-dim);display:flex;flex-wrap:wrap;gap:0.6rem 1.3rem;}
+  .role-meta span{display:inline-flex;align-items:center;gap:0.4rem;}
+  .role-meta i{color:var(--amber);font-size:0.75rem;}
+
+  .project-card{position:relative;border:1px solid var(--line);padding:1.7rem 1.8rem;margin-bottom:1.4rem;transition:border-color 0.2s;}
+  .project-card::before,.project-card::after,
+  .project-card .cbl,.project-card .cbr{content:"";position:absolute;width:14px;height:14px;border-color:var(--blue);opacity:0;transition:opacity 0.2s;}
+  .project-card::before{top:-1px;left:-1px;border-top:2px solid;border-left:2px solid;}
+  .project-card::after{top:-1px;right:-1px;border-top:2px solid;border-right:2px solid;}
+  .project-card .cbl{bottom:-1px;left:-1px;border-bottom:2px solid;border-left:2px solid;}
+  .project-card .cbr{bottom:-1px;right:-1px;border-bottom:2px solid;border-right:2px solid;}
+  .project-card:hover::before,.project-card:hover::after,.project-card:hover .cbl,.project-card:hover .cbr{opacity:1;}
+  .project-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:0.5rem;margin-bottom:0.7rem;}
+  .project-head h3{font-family:var(--display);font-size:1.08rem;font-weight:600;}
+  .project-period{font-family:var(--mono);font-size:0.76rem;color:var(--blue);}
+  .project-desc{color:var(--ink-dim);font-size:0.94rem;margin-bottom:1.1rem;}
+  .project-points li{position:relative;padding-left:1.2rem;margin-bottom:0.5rem;font-size:0.92rem;color:var(--ink-dim);}
+  .project-points li::before{content:"—";position:absolute;left:0;color:var(--amber);}
+  .project-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:1.1rem;padding-top:1rem;border-top:1px dashed var(--line);}
+  .project-tags span{font-family:var(--mono);font-size:0.7rem;padding:0.25rem 0.65rem;border:1px solid var(--line);color:var(--ink-dim);}
+
+  /* EDUCATION */
+  .edu-card{border:1px solid var(--line);padding:1.4rem 1.7rem;margin-bottom:1rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;}
+  .edu-card h3{font-family:var(--display);font-size:1rem;font-weight:600;margin-bottom:0.25rem;}
+  .edu-card p{font-size:0.87rem;color:var(--ink-dim);}
+  .edu-period{font-family:var(--mono);font-size:0.76rem;color:var(--blue);white-space:nowrap;}
+
+  /* CONTACT */
+  .contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:2.6rem;align-items:start;}
+  .contact-info p{color:var(--ink-dim);margin-bottom:1.6rem;}
+  .contact-links{display:flex;flex-direction:column;gap:0.85rem;}
+  .contact-link{display:flex;align-items:center;gap:0.7rem;font-size:0.94rem;color:var(--ink-dim);transition:color 0.2s;}
+  .contact-link:hover{color:var(--amber);}
+  .contact-link i{width:18px;color:var(--amber);}
+
+  .stamp-panel{border:1px solid var(--line);padding:2rem;position:relative;text-align:center;}
+  .stamp{display:flex;flex-direction:column;align-items:center;justify-content:center;border:2px solid var(--amber);color:var(--amber);border-radius:50%;width:118px;height:118px;transform:rotate(-9deg);font-family:var(--mono);letter-spacing:0.06em;margin:0 auto 1.3rem;}
+  .stamp .l1{font-size:0.7rem;font-weight:600;}
+  .stamp .l2{font-size:0.95rem;font-weight:700;margin:0.15rem 0;}
+  .stamp .l3{font-size:0.6rem;}
+  .stamp-panel p{color:var(--ink-dim);font-size:0.92rem;margin-bottom:1.3rem;}
+
+  footer{padding:2.2rem 0 3rem;text-align:center;font-family:var(--mono);font-size:0.76rem;color:var(--ink-dim);border-top:1px solid var(--line);}
+  footer span{color:var(--amber);}
+
+  @media (max-width:800px){
+    .profile-grid,.contact-grid{grid-template-columns:1fr;}
+    .achv-grid{grid-template-columns:1fr 1fr;}
+    .nav-links{gap:1rem;font-size:0.72rem;}
+    .hero{min-height:auto;padding:4rem 0 3rem;}
+    .tb-row{grid-template-columns:1fr;}
+    .tb-cell{border-right:none;}
+  }
+  @media (max-width:520px){
+    .nav-links{display:none;}
+    .hero h1{font-size:2rem;}
+    .achv-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo"><span class="mark"></span>AK · DRAWING SET</a>
+    <div class="nav-links">
+      <a href="#home" class="active">HOME</a>
+      <a href="#profile">PROFILE</a>
+      <a href="#achievements">ACHIEVEMENTS</a>
+      <a href="#experience">EXPERIENCE</a>
+      <a href="#education">EDUCATION</a>
+      <a href="#contact">CONTACT</a>
+    </div>
+  </div>
+</nav>
+
+<section id="home" class="hero">
+  <div class="container">
+    <div class="hero-eyebrow"><span class="compass"></span> FULL STACK DEVELOPER · E-GOVERNANCE SYSTEMS</div>
+    <h1>Anantha Krishnan<br>drafts systems that <span>governments run on.</span></h1>
+    <p class="hero-desc">
+      2+ years designing and shipping large-scale e-governance platforms —
+      Java 17 and Spring Boot on the backend, Angular 19 on the front, payroll
+      engines and RBAC systems built for two live government portals.
+    </p>
+    <div class="hero-cta">
+      <a href="#experience" class="btn btn-primary">View Projects →</a>
+      <a href="#contact" class="btn btn-ghost">Get In Touch</a>
+    </div>
+
+    <div class="title-block reveal">
+      <div class="tb-row">
+        <div class="tb-cell"><span class="k">NAME</span><span class="v">Anantha Krishnan</span></div>
+        <div class="tb-cell"><span class="k">DISCIPLINE</span><span class="v">Full Stack Development</span></div>
+      </div>
+      <div class="tb-row">
+        <div class="tb-cell"><span class="k">EXPERIENCE</span><span class="v amber">2+ Years</span></div>
+        <div class="tb-cell"><span class="k">LOCATION</span><span class="v">Chennai, India</span></div>
+      </div>
+      <div class="tb-row">
+        <div class="tb-cell"><span class="k">DWG NO.</span><span class="v">AK—2026</span></div>
+        <div class="tb-cell"><span class="k">STATUS</span><span class="v amber">Open to Work</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="profile">
+  <div class="container">
+    <div class="sheet-label">SHEET A-01 · PROFILE</div>
+    <h2 class="section-title">Profile</h2>
+    <div class="profile-grid">
+      <div class="profile-text reveal">
+        <p>
+          Results-driven Full Stack Developer with hands-on experience designing,
+          building and delivering large-scale e-governance and enterprise web
+          applications — with deep expertise in REST API development, payroll
+          automation, RBAC, JWT authentication and database query optimisation.
+        </p>
+        <p>
+          Delivered two live government portals — BOCWS (Bihar) and TNCSC BOWS
+          (Tamil Nadu) — in fast-paced Agile Scrum environments, known for
+          eliminating manual processes through smart automation and building
+          secure multi-role systems.
+        </p>
+        <p>Currently based in Chennai and open to new opportunities.</p>
+
+        <div class="meta-list">
+          <div class="meta-item"><i class="fas fa-location-dot"></i> Chennai, India</div>
+          <div class="meta-item"><i class="fas fa-briefcase"></i> Software Engineer, Eagle Software India Pvt. Ltd.</div>
+          <div class="meta-item"><i class="fas fa-diagram-project"></i> Focus: Backend APIs · Payroll Automation · Angular</div>
+          <div class="meta-item"><i class="fas fa-graduation-cap"></i> B.E. Electrical &amp; Electronics · RMK College of Engineering &amp; Technology</div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="sheet-label" style="margin-bottom:0.9rem;">LEGEND · SKILLS</div>
+        <div class="skill-cloud">
+          <span class="skill hot">Java 17</span>
+          <span class="skill hot">Spring Boot</span>
+          <span class="skill hot">Angular 19</span>
+          <span class="skill hot">PostgreSQL</span>
+          <span class="skill">TypeScript</span>
+          <span class="skill">JavaScript</span>
+          <span class="skill">REST APIs</span>
+          <span class="skill">Spring Security</span>
+          <span class="skill">Spring Scheduler</span>
+          <span class="skill">JWT Auth</span>
+          <span class="skill">JPA / Hibernate</span>
+          <span class="skill">Microservices</span>
+          <span class="skill">Angular Material</span>
+          <span class="skill">MySQL</span>
+          <span class="skill">RBAC</span>
+          <span class="skill">MVC Architecture</span>
+          <span class="skill">Git</span>
+          <span class="skill">Postman</span>
+          <span class="skill">Jira</span>
+          <span class="skill">Agile Scrum</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="achievements">
+  <div class="container">
+    <div class="sheet-label">SHEET A-02 · MEASURED OUTCOMES</div>
+    <h2 class="section-title">Key Achievements</h2>
+    <div class="achv-grid reveal">
+      <div class="achv-card"><div class="achv-num">50+</div><p>REST APIs delivered across 2 live government portals within tight deadlines.</p></div>
+      <div class="achv-card"><div class="achv-num">100%</div><p>Manual salary computation eliminated via Spring Boot Scheduler payroll automation.</p></div>
+      <div class="achv-card"><div class="achv-num">10+</div><p>Earnings components engineered into a single automated payroll cycle.</p></div>
+      <div class="achv-card"><div class="achv-num">6+</div><p>Deduction types automated with full auto-generation every cycle.</p></div>
+      <div class="achv-card"><div class="achv-num">2</div><p>Live government portals shipped end-to-end: BOCWS Bihar &amp; TNCSC BOWS.</p></div>
+      <div class="achv-card"><div class="achv-num">0</div><p>Sprint carry-overs across 2 concurrent projects in Agile Scrum.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="container">
+    <div class="sheet-label">SHEET A-03 · EXPERIENCE</div>
+    <h2 class="section-title">Professional Journey</h2>
+    <p style="color:var(--ink-dim);margin-bottom:2.2rem;max-width:620px;">
+      Government e-governance platforms built at Eagle Software India Pvt. Ltd.
+    </p>
+
+    <div class="role-header reveal">
+      <div class="role-title">Software Engineer</div>
+      <div class="role-meta">
+        <span><i class="fas fa-building"></i> Eagle Software India Pvt. Ltd. · Chennai</span>
+        <span><i class="fas fa-calendar"></i> Dec 2024 – Present</span>
+        <span><i class="fas fa-clock"></i> Full-time</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="cbl"></div><div class="cbr"></div>
+      <div class="project-head">
+        <h3>BOCWS · Bihar Online Civil Works System</h3>
+        <span class="project-period">Govt. of Bihar</span>
+      </div>
+      <p class="project-desc">Government portal for managing civil works, grievances, regulations and public information for Bihar state.</p>
+      <ul class="project-points">
+        <li>Developed 20+ RESTful APIs with Java 8 and Spring Boot connecting the Angular 19 frontend to backend services for FAQ, Grievance Management, ACT and Ready Reckoner modules</li>
+        <li>Optimised PostgreSQL queries and API logic for data-heavy portal screens, reducing load times on high-volume government endpoints</li>
+        <li>Built Angular frontend modules with reactive form validations, structured error handling and seamless backend integration</li>
+        <li>Applied MVC architecture and implemented structured global exception handling across all API endpoints</li>
+        <li>Coordinated with cross-functional teams to ensure backend APIs met frontend requirements and government compliance standards</li>
+      </ul>
+      <div class="project-tags"><span>Java 8</span><span>Spring Boot</span><span>Angular 19</span><span>PostgreSQL</span><span>MVC</span></div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="cbl"></div><div class="cbr"></div>
+      <div class="project-head">
+        <h3>TNCSC BOWS · Tamil Nadu Civil Supplies Corporation</h3>
+        <span class="project-period">Govt. of Tamil Nadu</span>
+      </div>
+      <p class="project-desc">Enterprise payroll and workforce management system for TNCSC employees.</p>
+      <ul class="project-points">
+        <li>Designed and developed 20+ RESTful APIs using Java 17, Spring Boot, JPA/Hibernate and PostgreSQL for payroll operations and employee management workflows</li>
+        <li>Built a complete Payroll Module covering 10+ earnings components including Basic Pay, HRA, DA, City/Special/Medical/Conveyance Allowance, FBF, HIS, GIS and Bonus</li>
+        <li>Automated 6+ deduction types — Professional Tax, ECPF, ECPF Loan &amp; Advance recovery, LIC, PLI and Union Contribution — with full auto-generation each payroll cycle</li>
+        <li>Implemented Spring Boot Scheduler-based monthly payroll automation for zero-manual-intervention salary computation and disbursement</li>
+        <li>Implemented RBAC and JWT-based stateless authentication for secure, role-specific module access</li>
+        <li>Built Angular Material 19 frontend components for payroll dashboards, reports and employee data management</li>
+      </ul>
+      <div class="project-tags"><span>Java 17</span><span>Spring Boot</span><span>Angular Material 19</span><span>PostgreSQL</span><span>JWT</span><span>RBAC</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="container">
+    <div class="sheet-label">SHEET A-04 · EDUCATION</div>
+    <h2 class="section-title">Education</h2>
+
+    <div class="edu-card reveal">
+      <div><h3>Bachelor of Engineering — Electrical and Electronics Engineering</h3><p>RMK College of Engineering and Technology · GPA 8.4 / 10</p></div>
+      <div class="edu-period">Jun 2019 – Aug 2022</div>
+    </div>
+    <div class="edu-card reveal">
+      <div><h3>Diploma — Electrical and Electronics Engineering</h3><p>Sri Durgadevi Polytechnic College · 85%</p></div>
+      <div class="edu-period">2017 – 2019</div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="sheet-label">SHEET A-05 · CONTACT</div>
+    <h2 class="section-title">Get In Touch</h2>
+
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <p>Interested in working together? I'm always open to discussing new opportunities in Chennai or remote roles that need solid full-stack e-governance and enterprise engineering work.</p>
+        <div class="contact-links">
+          <a href="tel:+917904968727" class="contact-link"><i class="fas fa-phone"></i> +91 7904968727</a>
+          <a href="mailto:ananthasrinis@gmail.com" class="contact-link"><i class="fas fa-envelope"></i> ananthasrinis@gmail.com</a>
+          <a href="https://linkedin.com/in/ananthakrishna" target="_blank" class="contact-link"><i class="fab fa-linkedin-in"></i> linkedin.com/in/ananthakrishna</a>
+          <div class="contact-link"><i class="fas fa-location-dot"></i> Chennai, India</div>
+        </div>
+      </div>
+
+      <div class="stamp-panel reveal">
+        <div class="stamp"><span class="l1">STATUS</span><span class="l2">APPROVED</span><span class="l3">FOR CONTACT</span></div>
+        <p>The quickest way to reach me is by email or phone — I usually reply within a day. Attach a role or project brief and I'll follow up with availability.</p>
+        <a href="mailto:ananthasrinis@gmail.com?subject=Opportunity%20for%20Anantha%20Krishnan" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Email Me</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">© 2026 Anantha Krishnan · <span>DWG AK—2026</span> · Built with care in Chennai</div>
+</footer>
+
+<script>
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => { if (scrollY >= sec.offsetTop - 100) current = sec.getAttribute('id'); });
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+    });
+  });
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
